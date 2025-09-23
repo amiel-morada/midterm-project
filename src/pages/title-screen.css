@@ -145,6 +145,34 @@
 /* Buttons inside the confirmation popup */
 .confirm-buttons {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  gap: 50px; /* extra breathing room */
   margin-top: 20px;
+}
+/* Confirm popup buttons */
+.confirm-popup .menu-button.confirm-button {
+  background-color: darkred;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: Arial, sans-serif;
+  transition: 0.18s;
+  outline: none; /* remove blue outline */
+}
+
+/* Hover state */
+.confirm-popup .menu-button.confirm-button:hover {
+  background-color: crimson;
+  transform: scale(1.04);
+}
+
+/* Focus & active states */
+.confirm-popup .menu-button.confirm-button:focus,
+.confirm-popup .menu-button.confirm-button:active {
+  background-color: darkred; /* keep red */
+  color: white;
+  outline: none; /* remove browser blue outline */
 }

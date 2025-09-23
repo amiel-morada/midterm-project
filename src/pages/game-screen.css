@@ -10,25 +10,75 @@
   box-sizing: border-box;
 }
 
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  z-index: -1; /* behind everything */
+  opacity: 1;
+  transition: opacity 0.3s ease; /* matches the JS fade duration */
+}
+
+.background.fade {
+  opacity: 0; /* triggers fade-out before changing bg */
+}
+
+
 /* Top row: stats */
 .top-row {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
+  justify-content: flex-start; /* align left */
+  align-items: center;
   width: 100%;
+  font-size: 18px;
+}
+
+.stats-row {
+  display: flex;
+  align-items: center;
+  gap: 24px; /* spacing between HP and Inventory groups */
+}
+
+/* HP with fixed-width value */
+.hp-label {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.hp-value {
+  display: inline-block;
+  width: 40px; /* fits up to 3 digits like 100 */
+  text-align: right;
+  font-family: monospace; /* keeps digits aligned */
+  color: #ff4d4d; /* red for HP */
+  font-weight: bold;
+}
+
+/* Inventory beside HP */
+.inventory-label {
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.inventory-value {
+  color: #ddd;
 }
 
 /* Buttons column (choices) */
 .buttons-column {
-  position: fixed;          /* fixed to stay above text container */
-  top: 240px;               /* slightly above text container */
-  left: 250px;              /* match text container left margin */
-  right: 250px;             /* match text container right margin */
+  position: fixed;          
+  top: 240px;               
+  left: 250px;              
+  right: 250px;             
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: calc(100vw - 500px); /* match text container width */
-  opacity: 0;              /* hidden initially, will fade in after text finishes */
+  width: calc(100vw - 500px); 
+  opacity: 0;              
   transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -38,40 +88,58 @@
   transform: translateY(0);
 }
 
-/* Stats column (HP & inventory) */
-.stats-column {
+/* Wrapper for text + speaker banner fixed at bottom */
+.text-container-wrapper {
+  position: fixed;
+  bottom: 100px; /* distance from bottom of screen */
+  left: 250px;
+  right: 250px;
   display: flex;
   flex-direction: column;
-  align-items: left;
-  gap: 8px;
-  font-size: 18px;
+  align-items: center;
+  gap: 6px; /* space between banner and text */
+  z-index: 500;
 }
 
-/* Text container at bottom of screen */
+/* Text container inside wrapper */
 .text-container {
-  position: fixed;          
-  bottom: 100px;            
-  left: 250px;              
-  right: 250px;             
-  height: 200px;            
-  padding: 40px 60px; 
+  position: relative; /* remove fixed */
+  height: 200px;
+  width: 100%;
+  padding: 40px 50px;
   background-color: black;
   color: white;
-  border-radius: 12px;      
+  border-radius: 12px;
   box-shadow: 0 -2px 10px rgba(255, 0, 0, 0.5);
   font-size: 18px;
   line-height: 1.4;
   word-wrap: break-word;
-  overflow-wrap: break-word;
   overflow-y: auto;
+  white-space: pre-wrap;
+  word-break: break-word;
   box-sizing: border-box;
-  white-space: pre-wrap; /* ensures words wrap properly */
-  word-break: break-word; 
+}
+
+/* Speaker banner */
+/* Speaker banner */
+.speaker-banner {
+  background-color: darkred;
+  color: white;
+  font-weight: bold;
+  padding: 4px 12px;
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  text-transform: uppercase;
+  
+  width: 180px; /* fixed width to fit "MANANANGGAL" comfortably */
+  text-align: center; /* center the speaker name */
+  display: inline-block;
+  box-sizing: border-box;
 }
 
 /* Game buttons */
 .game-button {
-  width: 100%; /* fixed width matching buttons-column / text container */
+  width: 100%; 
   height: 60px;
   padding: 12px 24px;
   font-size: 18px;
@@ -84,7 +152,6 @@
   transition: 0.18s;
 }
 
-/* Hover effect for buttons */
 .game-button:hover {
   background-color: crimson;
   transform: scale(1.04);
@@ -113,40 +180,91 @@
   transform: scale(1.04);
 }
 
-/* Letter-by-letter animation handled by React JS timing & period pause */
+/* Letter-by-letter animation */
 .text-letter {
   display: inline-block;
   opacity: 0;
-  transition: opacity 0.03s linear; /* base animation speed */
+  transition: opacity 0.03s linear;
 }
 
-/* Optional: responsive adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
   .top-row {
     flex-direction: column;
-    align-items: stretch;
-  }
-
-  .stats-column {
     align-items: flex-start;
-    margin-top: 12px;
+    gap: 12px;
   }
 
   .buttons-column {
-    position: static;       /* fix for mobile so it scrolls naturally */
+    position: static;       
     width: 100%;
     margin-left: 0;
     margin-right: 0;
     transform: none;
-     opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
+    opacity: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
 
-  .text-container {
+  .text-container-wrapper {
+    bottom: 80px;
     left: 16px;
     right: 16px;
-    bottom: 80px;           /* adjust for mobile spacing */
-    width: auto;
   }
+}
+
+/* Choice button animation */
+.choice-button {
+  padding: 10px 20px;
+  margin: 5px;
+  border: none;
+  background: white;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.game-button.chosen {
+  animation: chosenBlink 0.6s ease forwards;
+}
+
+@keyframes chosenBlink {
+  0% {
+    background-color: white;
+    color: black;
+  }
+  20% {
+    background-color: red;
+    color: white;
+  }
+  40% {
+    background-color: white;
+    color: black;
+  }
+  60% {
+    background-color: red;
+    color: white;
+  }
+  80% {
+    background-color: white;
+    color: black;
+  }
+  100% {
+    background-color: red;
+    color: white;
+  }
+}
+
+/* HP Colors */
+.hp-green {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.hp-orange {
+  color: #ff9800;
+  font-weight: bold;
+}
+
+.hp-red {
+  color: #f44336;
+  font-weight: bold;
 }

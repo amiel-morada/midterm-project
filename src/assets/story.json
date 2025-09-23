@@ -1,6 +1,10 @@
 {
   "start": {
-    "text": "You arrive at the dimly lit town of San Gubat. The air is heavy with fear. Who do you seek for information first?",
+    "text": [
+      "You were walking towards the place where people asked for your help.",
+      "You arrive at the dimly lit town of San Gubat. The air is heavy with fear.",
+      "Who do you seek for information first?"
+    ],
     "choices": [
       {
         "text": "Find the old Albularyo (Healer) at the edge of town.",
@@ -12,8 +16,27 @@
       }
     ]
   },
+
   "askAlbularyo": {
-    "text": "'It has wings like a bat and separates at the waist,' the old healer whispers, handing you a rough pouch. 'Take this salt. The Manananggal despises it.' You've gained Asin.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "I should find the old Albularyo at the edge of town. Maybe he can tell me more about this creature."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Good evening, Albularyo. Can you help me? What am I dealing with?"
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "It has wings like a bat and separates at the waist."
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "Here, take this salt. The Manananggal despises it."
+      },
+      "You've gained Asin."
+    ],
     "onArrive": { "addItem": "Asin" },
     "choices": [
       {
@@ -22,8 +45,27 @@
       }
     ]
   },
+
   "askCaptain": {
-    "text": "'My best men have vanished,' the captain says grimly, handing you a braid of garlic. 'We believe it's a Wakwak, a different kind of horror. This might keep it at bay.' You've gained Bawang.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "The captain might know something about these attacks. I need to report immediately."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Captain, I need your guidance. What kind of creature am I facing?"
+      },
+      {
+        "speaker": "Captain",
+        "text": "My best men have vanished. We believe it's a Wakwak, a different kind of horror. This might keep it at bay."
+      },
+      {
+        "speaker": "Captain",
+        "text": "Here, take this braid of garlic."
+      },
+      "You've gained Bawang."
+    ],
     "onArrive": { "addItem": "Bawang" },
     "choices": [
       {
@@ -32,8 +74,13 @@
       }
     ]
   },
+
   "oldChurch_entry": {
-    "text": "The ancient church is silent, its stone walls covered in moss. Dust motes dance in the single moonbeam piercing the roof. Do you investigate the crumbling bell tower or the desecrated altar?",
+    "text": [
+      "The ancient church is silent, its stone walls covered in moss.",
+      "Dust motes dance in the single moonbeam piercing the roof.",
+      "Do you investigate the crumbling bell tower or the desecrated altar?"
+    ],
     "choices": [
       {
         "text": "Climb the creaking stairs to the bell tower.",
@@ -45,8 +92,24 @@
       }
     ]
   },
+
   "bellTower": {
-    "text": "In the belfry, a creature with ragged wings and sharp talons screeches! It's a Wakwak, feasting on a goat. It turns its glowing red eyes on you!",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "I hear something above... I need to prepare myself for whatever's up there."
+      },
+      {
+        "speaker": "Wakwak",
+        "text": "Who dares disturb my feast?!"
+      },
+      {
+        "speaker": "Wakwak",
+        "text": "Prepare to be devoured!"
+      },
+      "It's a Wakwak, feasting on a goat.",
+      "It turns its glowing red eyes on you!"
+    ],
     "choices": [
       {
         "text": "Thrust the garlic braid at it!",
@@ -64,8 +127,24 @@
       }
     ]
   },
+
   "useGarlicOnWakwak": {
-    "text": "The Wakwak recoils from the pungent garlic, giving you an opening! You slash with your bolo, wounding its wing. It shrieks and flies off into the night, dropping something shiny.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "Take this! The garlic should weaken it."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "I strike with my bolo as it recoils."
+      },
+      {
+        "speaker": "Wakwak",
+        "text": "Aaaahhh!"
+      },
+      "It shrieks and flies off into the night, dropping something shiny.",
+      "You've found an Agimat."
+    ],
     "onArrive": { "addItem": "Agimat" },
     "choices": [
       {
@@ -74,8 +153,20 @@
       }
     ]
   },
+
   "fightWakwakNoGarlic": {
-    "text": "Without the garlic to weaken it, the Wakwak is too fast and ferocious. It claws you deeply before you can land a solid blow. You lose 30 HP and it escapes.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "Without garlic, I have no advantage. I need to fight with what I have!"
+      },
+      {
+        "speaker": "Wakwak",
+        "text": "You are no match for me!"
+      },
+      "It claws you deeply before you can land a solid blow.",
+      "You lose 30 HP."
+    ],
     "onArrive": { "takeDamage": 30 },
     "choices": [
       {
@@ -84,8 +175,18 @@
       }
     ]
   },
+
   "altar": {
-    "text": "The altar is overturned. Behind it, you find a small, intricately carved amulet throbbing with a faint warmth. It feels protective. You've found an Agimat.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "Let's check the altar. Something feels off here."
+      },
+      "The altar is overturned.",
+      "Behind it, you find a small, intricately carved amulet throbbing with a faint warmth.",
+      "It feels protective.",
+      "You've found an Agimat."
+    ],
     "onArrive": { "addItem": "Agimat" },
     "choices": [
       {
@@ -94,8 +195,13 @@
       }
     ]
   },
+
   "riceFields_entry": {
-    "text": "The moon hangs high over the vast, dark rice paddies. The air is still, save for the chirping of crickets. In the distance, you hear the faint sound of a baby crying.",
+    "text": [
+      "The moon hangs high over the vast, dark rice paddies.",
+      "The air is still, save for the chirping of crickets.",
+      "In the distance, you hear the faint sound of a baby crying."
+    ],
     "choices": [
       {
         "text": "It's a trap. A Tiyanak. Ignore it and press on.",
@@ -107,8 +213,20 @@
       }
     ]
   },
+
   "investigateTiyanak": {
-    "text": "You follow the crying to a small thicket. As you part the leaves, the crying stops. A small, monstrous creature with sharp teeth leaps out, biting your leg before scurrying away! It was a Tiyanak!",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "That crying... could be a trap, but I can't ignore it."
+      },
+      {
+        "speaker": "Tiyanak",
+        "text": "Hehehe, come closer, human! My teeth hunger!"
+      },
+      "A small, monstrous creature leaps out, biting your leg before scurrying away!",
+      "It was a Tiyanak!"
+    ],
     "choices": [
       {
         "text": "You fell for the oldest trick in the book! (Lose 25 HP)",
@@ -122,8 +240,16 @@
       }
     ]
   },
+
   "tiyanakDamage": {
-    "text": "The bite is painful and you feel a strange weakness spreading. You lose 25 HP. You curse your foolishness and continue towards the ominous Balete tree.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "I was fooled! Its bite is painful!"
+      },
+      "You lose 25 HP.",
+      "You curse your foolishness and continue towards the ominous Balete tree."
+    ],
     "onArrive": { "takeDamage": 25 },
     "choices": [
       {
@@ -132,8 +258,13 @@
       }
     ]
   },
+
   "baleteTree_approach": {
-    "text": "You've reached the heart of the darkness: a massive, ancient Balete tree with thick, hanging roots. You can hear a sickening squelching sound from above. The Manananggal is here. This is the final battle.",
+    "text": [
+      "You've reached the heart of the darkness: a massive, ancient Balete tree with thick, hanging roots.",
+      "You can hear a sickening squelching sound from above.",
+      "The Manananggal is here. This is the final battle."
+    ],
     "choices": [
       {
         "text": "Charge the tree and attack the creature head-on!",
@@ -145,8 +276,25 @@
       }
     ]
   },
+
   "finalFight_direct": {
-    "text": "You attack the flying creature directly, but it's too agile in the air. It swoops down, its claws tearing at you. Your bravery costs you dearly. You lose 50 HP.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "I need to face it head-on. I must be careful!"
+      },
+      {
+        "speaker": "Manananggal",
+        "text": "How dare you come near me, human?!"
+      },
+      {
+        "speaker": "Manananggal",
+        "text": "You won't leave this place alive!"
+      },
+      "It swoops down, its claws tearing at you.",
+      "Your bravery costs you dearly.",
+      "You lose 50 HP."
+    ],
     "onArrive": { "takeDamage": 50 },
     "choices": [
       {
@@ -155,8 +303,15 @@
       }
     ]
   },
+
   "finalFight_search": {
-    "text": "You ignore the airborne horror and frantically search the base of the Balete tree. Hidden among the gnarled roots, you find it: the creature's vulnerable lower torso, standing motionless.",
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "I must find its lower half. This is my only chance!"
+      },
+      "Hidden among the gnarled roots, you find it: the creature's vulnerable lower torso, standing motionless."
+    ],
     "choices": [
       {
         "text": "Pour the holy salt into the torso!",
@@ -169,16 +324,46 @@
       }
     ]
   },
-  "goodEnding": {
-    "text": "As the salt touches the flesh, the torso erupts in black smoke. High above, the winged creature gives a final, agonizing shriek and disintegrates into dust. The sun begins to rise. You have saved San Gubat.",
-    "isEnding": true
-  },
-  "badEnding_noSalt": {
-    "text": "Your bolo cuts deep, but it's not enough. The creature swoops down, enraged, and impales you with its sharp tongue. Your lack of the proper tool was your undoing. GAME OVER.",
-    "isEnding": true
-  },
-  "gameOver_hp": {
-    "text": "Your wounds are too severe. You collapse, and the darkness consumes you. Your hunt ends in failure. GAME OVER.",
-    "isEnding": true
-  }
+
+ "goodEnding": {
+  "text": [
+    "As the salt touches the flesh, the torso erupts in black smoke.",
+    {
+      "speaker": "Manananggal",
+      "text": [
+        "\"No... this cannot be...!\""
+      ]
+    },
+    "High above, the winged creature gives a final, agonizing shriek and disintegrates into dust.",
+    "The sun begins to rise.",
+    "You have saved San Gubat."
+  ],
+  "isEnding": true
+},
+
+"badEnding_noSalt": {
+  "text": [
+    "Your bolo cuts deep, but it's not enough.",
+    {
+      "speaker": "Manananggal",
+      "text": [
+        "\"You dare strike me without the salt?!\""
+      ]
+    },
+    "The creature swoops down, enraged, and impales you with its sharp tongue.",
+    "Your lack of the proper tool was your undoing.",
+    "GAME OVER."
+  ],
+  "isEnding": true
+},
+
+"gameOver_hp": {
+  "text": [
+    "Your wounds are too severe.",
+    "You collapse, and the darkness consumes you.",
+    "Your hunt ends in failure.",
+    "GAME OVER."
+  ],
+  "isEnding": true
+}
 }
