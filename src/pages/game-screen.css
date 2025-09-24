@@ -23,24 +23,21 @@
   transition: opacity 0.3s ease; /* matches the JS fade duration */
 }
 
-.background.fade {
-  opacity: 0; /* triggers fade-out before changing bg */
-}
 
-
-/* Top row: stats */
 .top-row {
   display: flex;
-  justify-content: flex-start; /* align left */
+  justify-content: flex-start; /* controls horizontal alignment */
   align-items: center;
   width: 100%;
   font-size: 18px;
+  padding-left: 30px;   /* <-- add left padding */
+  padding-top: 20px;  /* <-- add right padding if needed */
 }
 
 .stats-row {
   display: flex;
   align-items: center;
-  gap: 24px; /* spacing between HP and Inventory groups */
+  gap: 24px; /* space between HP & inventory */
 }
 
 /* HP with fixed-width value */

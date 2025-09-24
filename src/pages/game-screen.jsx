@@ -15,14 +15,17 @@ import thicket from "../assets/background/thicket.png";
 import baleteTree from "../assets/background/balete_tree.png";
 import victorySunrise from "../assets/background/victory_sunrise.png";
 import defeatDark from "../assets/background/defeat_dark.png";
+import edgeTown from "../assets/background/edge_town.png";
 
 // Map story nodes to imported images
 const bgMap = {
   start: sanGubat,
-  askAlbularyo: altar,
+  askAlbularyo: edgeTown,
   askCaptain: townHall,
   oldChurch_entry: oldChurch,
   bellTower: bellTower,
+  useGarlicOnWakwak: bellTower,
+  fightWakwakNoGarlic: bellTower,
   altar: altar,
   riceFields_entry: riceField,
   investigateTiyanak: thicket,
@@ -46,7 +49,7 @@ export default function GameScreen({ onBackToTitle }) {
   const [pendingDamage, setPendingDamage] = useState(null);
 
   // Dynamic background
-  const [background, setBackground] = useState(null);
+  const [background, setBackground] = useState(bgMap.start);
   const [fadeBg, setFadeBg] = useState(false);
 
   // Load saved progress
@@ -57,10 +60,12 @@ export default function GameScreen({ onBackToTitle }) {
       setCurrentNode(node);
       setInventory(inv);
       setHp(health);
+      setBackground(bgMap[node] || bgMap.start);
     } else {
       setCurrentNode("start");
       setInventory([]);
       setHp(100);
+      setBackground(bgMap.start);
     }
     setShowButtons(false);
   }, []);
@@ -68,14 +73,12 @@ export default function GameScreen({ onBackToTitle }) {
   // Update background when currentNode changes
   useEffect(() => {
     if (!currentNode) return;
-    const nextBg = bgMap[currentNode] || sanGubat;
-
+    const nextBg = bgMap[currentNode] || bgMap.start;
     setFadeBg(true);
     const timer = setTimeout(() => {
       setBackground(nextBg);
       setFadeBg(false);
     }, 300);
-
     return () => clearTimeout(timer);
   }, [currentNode]);
 
@@ -113,64 +116,69 @@ export default function GameScreen({ onBackToTitle }) {
   const node = storyData[currentNode];
 
   return (
-    <div className="game-screen">
-      {/* Background */}
+    <>
+      {/* Dynamic Background */}
       <div
         className={`background ${fadeBg ? "fade" : ""}`}
         style={{ backgroundImage: `url(${background})` }}
       />
 
-      {/* Back button */}
-      <button className="back-button" onClick={onBackToTitle}>
-        Back to Title
-      </button>
+      {/* Main translucent overlay */}
+      <div className="game-screen" style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
+        {/* Back button */}
+        <button className="back-button" onClick={onBackToTitle}>
+          Back to Title
+        </button>
 
-      {/* Top row: HP & inventory */}
-      <div className="top-row">
-        <div className="stats-row">
-          <span className="hp-label">HP:</span>
-          <span
-            className={`hp-value ${hp >= 60 ? "hp-green" : hp >= 40 ? "hp-orange" : "hp-red"}`}
-          >
-            {hp}
-          </span>
-          <span className="inventory-label">Inventory:</span>
-          <span className="inventory-value">{inventory.join(", ") || "None"}</span>
+        {/* Top row: HP & inventory */}
+        <div className="top-row">
+          <div className="stats-row">
+            <span className="hp-label">HP:</span>
+            <span
+              className={`hp-value ${
+                hp >= 60 ? "hp-green" : hp >= 40 ? "hp-orange" : "hp-red"
+              }`}
+            >
+              {hp}
+            </span>
+            <span className="inventory-label">Inventory:</span>
+            <span className="inventory-value">{inventory.join(", ") || "None"}</span>
+          </div>
         </div>
+
+        {/* Text container */}
+        <GameTextContainer
+          text={node.text}
+          speaker={node.speaker}
+          onFinished={() => {
+            if (pendingItem) {
+              setInventory((prev) => [...new Set([...prev, pendingItem])]);
+              setPendingItem(null);
+            }
+            if (pendingDamage) {
+              setHp((prev) => {
+                const newHp = prev - pendingDamage;
+                if (newHp <= 0) {
+                  setCurrentNode("gameOver_hp");
+                  setIsGameEnded(true);
+                }
+                return newHp > 0 ? newHp : 0;
+              });
+              setPendingDamage(null);
+            }
+            setShowButtons(true);
+          }}
+          speed={30}
+        />
+
+        {/* Choice buttons */}
+        <GameButtons
+          choices={node.choices || []}
+          inventory={inventory}
+          handleChoice={handleChoice}
+          show={showButtons}
+        />
       </div>
-
-      {/* Text container */}
-      <GameTextContainer
-        text={node.text}
-        speaker={node.speaker}
-        onFinished={() => {
-          if (pendingItem) {
-            setInventory((prev) => [...new Set([...prev, pendingItem])]);
-            setPendingItem(null);
-          }
-          if (pendingDamage) {
-            setHp((prev) => {
-              const newHp = prev - pendingDamage;
-              if (newHp <= 0) {
-                setCurrentNode("gameOver_hp");
-                setIsGameEnded(true);
-              }
-              return newHp > 0 ? newHp : 0;
-            });
-            setPendingDamage(null);
-          }
-          setShowButtons(true);
-        }}
-        speed={30}
-      />
-
-      {/* Choice buttons */}
-      <GameButtons
-        choices={node.choices || []}
-        inventory={inventory}
-        handleChoice={handleChoice}
-        show={showButtons}
-      />
-    </div>
+    </>
   );
 }
