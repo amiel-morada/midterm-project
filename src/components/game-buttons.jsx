@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/game-screen.css";
+import "../pages/GameScreen.css";
 
 export default function GameButtons({ choices, inventory, handleChoice, show }) {
   const handleAnimatedChoice = (e, choice) => {

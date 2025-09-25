@@ -3,11 +3,46 @@
     "text": [
       "You were walking towards the place where people asked for your help.",
       "You arrive at the dimly lit town of San Gubat. The air is heavy with fear.",
-      "Who do you seek for information first?"
+      {
+        "speaker": "Elias",
+        "text": "Hunter! You didn’t think I’d let you face this alone, did you? I’m coming with you. Adventure calls!"
+      },
+      {
+        "speaker": "Elias",
+        "text": "Besides… I don’t believe in these old folktales. There’s no such thing as monsters. Whoever’s behind this chaos is just a criminal, a man hiding in the dark. Not some creature from our elders’ stories."
+      },
+      "Before seeking answers, someone steps into your path..."
     ],
     "choices": [
       {
-        "text": "Find the old Albularyo (Healer) at the edge of town.",
+        "text": "Approach the woman.",
+        "to": "meetDahra"
+      }
+    ]
+  },
+
+  "meetDahra": {
+    "text": [
+      {
+        "speaker": "Dahra",
+        "text": "Traveler, you must be Hunter. I am Dahra. Be careful — the nights here are not kind."
+      },
+      {
+        "speaker": "Dahra",
+        "text": "They say the monster can split itself in half... only salt poured on its torso will end it. Remember this."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Salt? Hmph. Old women’s tales... but I suppose we should keep it in mind."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Thank you, Dahra. Where should I begin?"
+      }
+    ],
+    "choices": [
+      {
+        "text": "Seek the old Albularyo (Healer) at the edge of town.",
         "to": "askAlbularyo"
       },
       {
@@ -29,19 +64,69 @@
       },
       {
         "speaker": "Albularyo",
+        "text": "Its story were passed down from generation to generation."
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "I have heard tales of it from my ancestors."
+      },
+      {
+        "speaker": "Albularyo",
         "text": "It has wings like a bat and separates at the waist."
       },
       {
         "speaker": "Albularyo",
         "text": "Here, take this salt. The Manananggal despises it."
       },
+      {
+        "speaker": "Elias",
+        "text": "Salt, huh? Do you really think something so simple could kill it? Still... if you trust him, then so do I."
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "Who is this man you are with?"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "It is my bestfriend Elias."
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "..."
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "He should not be here. Leave him behind."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "But he is my friend. I can’t just leave him."
+      },
+      {
+        "speaker": "Albularyo",
+        "text": "..."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Don't listen to him, Hunter. I’m coming with you."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Besides, I don't like his place. It stings me somehow."
+      },
+      {
+        "speaker": "Elias",
+        "text": "We should continue our search."
+      },
       "You've gained Asin."
     ],
-    "onArrive": { "addItem": "Asin" },
+    "onArrive": {
+      "addItem": "Asin"
+    },
     "choices": [
       {
-        "text": "Thank him and head to the old church where it was last seen.",
-        "to": "oldChurch_entry"
+        "text": "Leave the Albularyo.",
+        "to": "npcBeforeOldChurch"
       }
     ]
   },
@@ -58,18 +143,78 @@
       },
       {
         "speaker": "Captain",
-        "text": "My best men have vanished. We believe it's a Wakwak, a different kind of horror. This might keep it at bay."
+        "text": "So, you were the 'Hunter' everyone was waiting for."
       },
       {
         "speaker": "Captain",
-        "text": "Here, take this braid of garlic."
+        "text": "My best men have vanished. We believe it's a Manananggal, a different kind of horror. This might keep it at bay."
       },
-      "You've gained Bawang."
+      {
+        "speaker": "Captain",
+        "text": "I suggest you have this garlic. They say it will ward off evil spirits."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Garlic? Hah. So many charms and trinkets... which of these do we even trust?"
+      },
+      {
+        "speaker": "Captain",
+        "text": "Some tales said that the hero will fight the Manananggal alone. Why are you with him?"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Elias is my bestfriend. He will come with me"
+      },
+      {
+        "speaker": "Elias",
+        "text": "Yeah! I don't care if you are the Barangay Captain. Im coming with him!"
+      },
+      {
+        "speaker": "Captain",
+        "text": "Whatever. Continue your search. And take care. Take this Bawang with you."
+      }
     ],
-    "onArrive": { "addItem": "Bawang" },
+    "onArrive": {
+      "addItem": "Bawang"
+    },
     "choices": [
       {
-        "text": "Nod grimly and head to the old church where it was last seen.",
+        "text": "Leave the Barangay Captain.",
+        "to": "npcBeforeOldChurch"
+      }
+    ]
+  },
+
+  "npcBeforeOldChurch": {
+    "text": [
+      {
+        "speaker": "Mang Kardo",
+        "text": "Hunter... I am Mang Kardo, a farmer. I’ve seen shadows circling the old church at night."
+      },
+      {
+        "speaker": "Mang Kardo",
+        "text": "The old ones say... its torso waits while the rest of it flies. Salt — only salt — can end it."
+      },
+      {
+        "speaker": "Elias",
+        "text": "More salt talk. Isn’t it strange that everyone here repeats the same story? Almost as if they want you to believe it."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Thank you, Mang Kardo. I’ll check the old church."
+      },
+      {
+        "speaker": "Mang Kardo",
+        "text": "And also, just a reminder. Be careful of who you trust."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Hmmp, weirdo. Let's go now Hunter!"
+      }
+    ],
+    "choices": [
+      {
+        "text": "Head towards the old church.",
         "to": "oldChurch_entry"
       }
     ]
@@ -77,8 +222,33 @@
 
   "oldChurch_entry": {
     "text": [
+      "You and Elias arrive at the old, abandoned church on the outskirts of town.",
       "The ancient church is silent, its stone walls covered in moss.",
       "Dust motes dance in the single moonbeam piercing the roof.",
+      {
+        "speaker": "Elias",
+        "text": "Its so creepy here... I don't like it. Let's leave this place."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Not now Elias. We need to check the church for clues."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Yea yea, whatever. Just be quick."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "I wonder if we should check the bell tower or the altar."
+      },
+      {
+        "speaker": "Elias",
+        "text": "My gut says we will find someone at the bell tower that would help us."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Also, there is something in the altar that is making me uncomfortable."
+      },
       "Do you investigate the crumbling bell tower or the desecrated altar?"
     ],
     "choices": [
@@ -100,6 +270,18 @@
         "text": "I hear something above... I need to prepare myself for whatever's up there."
       },
       {
+        "speaker": "Hunter",
+        "text": "Elias, where are you?"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Elias?"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "ELIAS!"
+      },
+      {
         "speaker": "Wakwak",
         "text": "Who dares disturb my feast?!"
       },
@@ -108,7 +290,11 @@
         "text": "Prepare to be devoured!"
       },
       "It's a Wakwak, feasting on a goat.",
-      "It turns its glowing red eyes on you!"
+      "It turns its glowing red eyes on you!",
+      {
+        "speaker": "Hunter",
+        "text": "I AM NOT AFRAID OF YOU, MONSTER!"
+      }
     ],
     "choices": [
       {
@@ -117,7 +303,7 @@
         "requires": "Bawang"
       },
       {
-        "text": "You have no garlic! Fight it with your bolo!",
+        "text": "Fight it with your bolo!",
         "to": "fightWakwakNoGarlic"
       },
       {
@@ -142,14 +328,12 @@
         "speaker": "Wakwak",
         "text": "Aaaahhh!"
       },
-      "It shrieks and flies off into the night, dropping something shiny.",
-      "You've found an Agimat."
+      "It shrieks and flies off into the night."
     ],
-    "onArrive": { "addItem": "Agimat" },
     "choices": [
       {
-        "text": "You found an Agimat! Continue to the rice fields.",
-        "to": "riceFields_entry"
+        "text": "The Wakwak flees into the shadows. Continue outside.",
+        "to": "npcBeforeRiceFields"
       }
     ]
   },
@@ -165,13 +349,19 @@
         "text": "You are no match for me!"
       },
       "It claws you deeply before you can land a solid blow.",
-      "You lose 30 HP."
+      "You lose 30 HP.",
+      {
+        "speaker": "Hunter",
+        "text": "AARRGHHH... I need to get out of here!"
+      }
     ],
-    "onArrive": { "takeDamage": 30 },
+    "onArrive": {
+      "takeDamage": 30
+    },
     "choices": [
       {
-        "text": "Wounded, you limp towards the rice fields.",
-        "to": "riceFields_entry"
+        "text": "Wounded, you limp outside.",
+        "to": "npcBeforeRiceFields"
       }
     ]
   },
@@ -180,17 +370,75 @@
     "text": [
       {
         "speaker": "Hunter",
-        "text": "Let's check the altar. Something feels off here."
+        "text": "Let's check the altar. Something feels safe here."
+      },
+      {
+        "speaker": "Elias",
+        "text": "I don't know man, the altar feels... off. Like something repels me here."
       },
       "The altar is overturned.",
-      "Behind it, you find a small, intricately carved amulet throbbing with a faint warmth.",
+      "You find something shiny.",
+      {
+        "speaker": "Hunter",
+        "text": "Wait, where's Elias?"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "He must have went outside."
+      },
+      "Behind the altar, you find a small, intricately carved amulet throbbing with a faint warmth.",
       "It feels protective.",
       "You've found an Agimat."
     ],
-    "onArrive": { "addItem": "Agimat" },
+    "onArrive": {
+      "addItem": "Agimat"
+    },
     "choices": [
       {
-        "text": "With the amulet secured, you head towards the rice fields.",
+        "text": "With the amulet secured, you leave the church.",
+        "to": "npcBeforeRiceFields"
+      }
+    ]
+  },
+
+  "npcBeforeRiceFields": {
+    "text": [
+      {
+        "speaker": "Hunter",
+        "text": "There you are Elias! I was worried."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Sorry Hunter, I just felt uneasy back in the church."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Is that wound? What happened? Did the manananggal attack you?"
+      },
+      {
+        "speaker": "Elias",
+        "text": "Oh this? This is nothing! I stumbled on some rocks when I was leaving the church."
+      },
+      {
+        "speaker": "Luningning",
+        "text": "You must be Hunter... my name is Luningning. I lost my sister to that winged beast."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Yes,  I am Hunter. I'm sorry for your loss, Luningning. Do you know where the creature might be?"
+      },
+      {
+        "speaker": "Luningning",
+        "text": "The elders whisper that its torso is its doom. Salt, only salt, will finish it."
+      },
+      {
+        "speaker": "Elias",
+        "text": "Again with the salt... doesn’t it feel too convenient? But fine, Hunter. Lead the way."
+      }
+    ],
+    "choices": [
+      {
+        "text": "Head into the rice fields.",
         "to": "riceFields_entry"
       }
     ]
@@ -200,6 +448,22 @@
     "text": [
       "The moon hangs high over the vast, dark rice paddies.",
       "The air is still, save for the chirping of crickets.",
+      {
+        "speaker": "Elias",
+        "text": "I'M SCARED HUNTER! LET'S GET OUT OF HERE!"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "WAIT, ELIAS! NO! I HAVE TO CHECK IT OUT!"
+      },
+      {
+        "speaker": "Elias",
+        "text": "YOU CAN DO IT HUNTER! I WILL WAIT YOU AT THE BALLETE TREE!"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "You moron, don't just run off!"
+      },
       "In the distance, you hear the faint sound of a baby crying."
     ],
     "choices": [
@@ -247,10 +511,13 @@
         "speaker": "Hunter",
         "text": "I was fooled! Its bite is painful!"
       },
-      "You lose 25 HP.",
-      "You curse your foolishness and continue towards the ominous Balete tree."
+      "You curse your foolishness and continue towards the ominous Balete tree.",
+      "You lose 25 HP."
+      
     ],
-    "onArrive": { "takeDamage": 25 },
+    "onArrive": {
+      "takeDamage": 25
+    },
     "choices": [
       {
         "text": "Continue, more cautious than before.",
@@ -261,7 +528,15 @@
 
   "baleteTree_approach": {
     "text": [
+      {
+        "speaker": "Hunter",
+        "text": "I can't believe Elias ran off. I hope he's okay..."
+      },
       "You've reached the heart of the darkness: a massive, ancient Balete tree with thick, hanging roots.",
+      {
+        "speaker": "Hunter",
+        "text": "But he said we'll meet here. I have to find him."
+      },
       "You can hear a sickening squelching sound from above.",
       "The Manananggal is here. This is the final battle."
     ],
@@ -293,9 +568,12 @@
       },
       "It swoops down, its claws tearing at you.",
       "Your bravery costs you dearly.",
-      "You lose 50 HP."
+      "You lose 50 HP.",
+      "The creature screeches and takes flight, disappearing into the shadows of the tree..."
     ],
-    "onArrive": { "takeDamage": 50 },
+    "onArrive": {
+      "takeDamage": 50
+    },
     "choices": [
       {
         "text": "You're heavily wounded! You must find its lower half!",
@@ -310,7 +588,27 @@
         "speaker": "Hunter",
         "text": "I must find its lower half. This is my only chance!"
       },
-      "Hidden among the gnarled roots, you find it: the creature's vulnerable lower torso, standing motionless."
+      {
+        "speaker": "Hunter",
+        "text": "There you are Elias! Where have you ran off this time?!"
+      },
+      "Hidden among the gnarled roots, you find it: the creature's vulnerable lower torso, standing motionless.",
+      {
+        "speaker": "Elias",
+        "text": "...Yes. There it is. End it quickly, Hunter. Or should I say... try to."
+      },
+      {
+        "speaker": "Hunter",
+        "text": "Elias...? Why do you look so strange... and those wounds...?"
+      },
+      {
+        "speaker": "Manananggal",
+        "text": "Fool! Did you never wonder why I guided you here? I am the Manananggal!"
+      },
+      {
+        "speaker": "Hunter",
+        "text": "No... Elias... all this time?!"
+      }
     ],
     "choices": [
       {
@@ -319,26 +617,33 @@
         "requires": "Asin"
       },
       {
-        "text": "You don't have salt! Hack at it with your bolo!",
+        "text": "Hack at it with your bolo!",
         "to": "badEnding_noSalt"
       }
     ]
   },
-
- "goodEnding": {
+"goodEnding": {
   "text": [
     "As the salt touches the flesh, the torso erupts in black smoke.",
     {
       "speaker": "Manananggal",
-      "text": [
-        "\"No... this cannot be...!\""
-      ]
+      "text": "No... this cannot be...!"
     },
     "High above, the winged creature gives a final, agonizing shriek and disintegrates into dust.",
     "The sun begins to rise.",
-    "You have saved San Gubat."
+    {
+      "speaker": "Hunter",
+      "text": "Elias... my friend... why? Why did it have to be you?"
+    },
+    "You fall to your knees, torn between triumph and heartbreak.",
+    {
+      "speaker": "Hunter",
+      "text": "At least... I have killed the monster. San Gubat is now."
+    },
+    "You have saved San Gubat..."
   ],
-  "isEnding": true
+  "isEnding": true,
+  "endingType": "victory"
 },
 
 "badEnding_noSalt": {
@@ -346,15 +651,18 @@
     "Your bolo cuts deep, but it's not enough.",
     {
       "speaker": "Manananggal",
-      "text": [
-        "\"You dare strike me without the salt?!\""
-      ]
+      "text": "You dare strike me?!"
     },
     "The creature swoops down, enraged, and impales you with its sharp tongue.",
+    {
+      "speaker": "Hunter",
+      "text": "Elias... why...?"
+    },
     "Your lack of the proper tool was your undoing.",
     "GAME OVER."
   ],
-  "isEnding": true
+  "isEnding": true,
+  "endingType": "defeat"
 },
 
 "gameOver_hp": {
@@ -364,6 +672,7 @@
     "Your hunt ends in failure.",
     "GAME OVER."
   ],
-  "isEnding": true
+  "isEnding": true,
+  "endingType": "defeat"
 }
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import defeatBg from "../assets/background/defeat_dark.png";
-import "./game-screen.css"; // reuse styles
+import "./GameScreen.css"; // reuse styles
 
 export default function DefeatScreen({ onBackToTitle }) {
   return (

@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/title-screen.css";
+import "../pages/TitleScreen.css";
 
 export default function TitleModal({ isVisible, onConfirm, onCancel }) {
   if (!isVisible) return null; // hide modal if not visible

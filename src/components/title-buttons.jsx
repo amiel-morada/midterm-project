@@ -1,5 +1,5 @@
 import React from "react";
-import "../pages/title-screen.css";
+import "../pages/TitleScreen.css";
 
 export default function TitleButtons({ hasSave, currentNode, onNewGame, onContinue }) {
   const handleNewGame = () => {

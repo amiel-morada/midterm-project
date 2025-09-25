@@ -1,13 +1,23 @@
+/* Prevent body scroll */
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* Disable scrolling */
+  height: 100%;
+  width: 100%;
+}
+
 /* Main container */
 .game-screen {
   display: flex;
   flex-direction: column;
   height: 100vh;
-  width: 100vw; /* full screen width */
+  width: 100vw;
   padding: 16px;
-  background-color: #111; /* dark background */
+  background-color: #111;
   color: white;
   box-sizing: border-box;
+  overflow: hidden; /* Ensure no scrollbars inside game screen */
 }
 
 .background {
@@ -18,64 +28,65 @@
   height: 100%;
   background-size: cover;
   background-position: center;
-  z-index: -1; /* behind everything */
+  z-index: -1;
   opacity: 1;
-  transition: opacity 0.3s ease; /* matches the JS fade duration */
+  transition: opacity 0.3s ease;
 }
-
 
 .top-row {
   display: flex;
-  justify-content: flex-start; /* controls horizontal alignment */
+  justify-content: flex-start;
   align-items: center;
   width: 100%;
   font-size: 18px;
-  padding-left: 30px;   /* <-- add left padding */
-  padding-top: 20px;  /* <-- add right padding if needed */
+  padding-left: 30px;
+  padding-top: 20px;
 }
 
 .stats-row {
   display: flex;
   align-items: center;
-  gap: 24px; /* space between HP & inventory */
+  gap: 16px;
+  flex-wrap: wrap; /* allow wrapping if needed */
 }
 
-/* HP with fixed-width value */
 .hp-label {
   font-weight: bold;
-  margin-right: 6px;
+  margin-right: -20px;
 }
 
+/* HP value with dynamic color via CSS variable */
 .hp-value {
   display: inline-block;
-  width: 40px; /* fits up to 3 digits like 100 */
+  width: 100px; /* slightly wider to fit "/100" */
   text-align: right;
-  font-family: monospace; /* keeps digits aligned */
-  color: #ff4d4d; /* red for HP */
+  font-family: monospace;
   font-weight: bold;
+  color: var(--hp-color, #ff4d4d); /* fallback red */
 }
 
-/* Inventory beside HP */
 .inventory-label {
   font-weight: bold;
-  margin-right: 6px;
+  margin-right: 2px;
 }
 
 .inventory-value {
   color: #ddd;
+  max-width: calc(100vw - 150px); /* ensures it doesn’t overflow */
+  overflow-wrap: break-word;
 }
 
 /* Buttons column (choices) */
 .buttons-column {
-  position: fixed;          
-  top: 240px;               
-  left: 250px;              
-  right: 250px;             
+  position: fixed;
+  top: 240px;
+  left: 250px;
+  right: 250px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: calc(100vw - 500px); 
-  opacity: 0;              
+  width: calc(100vw - 500px);
+  opacity: 0;
   transform: translateY(20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -88,22 +99,21 @@
 /* Wrapper for text + speaker banner fixed at bottom */
 .text-container-wrapper {
   position: fixed;
-  bottom: 100px; /* distance from bottom of screen */
+  bottom: 100px;
   left: 250px;
   right: 250px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px; /* space between banner and text */
+  gap: 6px;
   z-index: 500;
 }
 
-/* Text container inside wrapper */
 .text-container {
-  position: relative; /* remove fixed */
+  position: relative;
   height: 200px;
   width: 100%;
-  padding: 40px 50px;
+  padding: 45px 55px;
   background-color: black;
   color: white;
   border-radius: 12px;
@@ -111,14 +121,12 @@
   font-size: 18px;
   line-height: 1.4;
   word-wrap: break-word;
-  overflow-y: auto;
+  overflow-y: auto; /* keeps scrolling only inside text box */
   white-space: pre-wrap;
   word-break: break-word;
   box-sizing: border-box;
 }
 
-/* Speaker banner */
-/* Speaker banner */
 .speaker-banner {
   background-color: darkred;
   color: white;
@@ -127,16 +135,14 @@
   border-radius: 8px;
   font-family: Arial, sans-serif;
   text-transform: uppercase;
-  
-  width: 180px; /* fixed width to fit "MANANANGGAL" comfortably */
-  text-align: center; /* center the speaker name */
+  width: 180px;
+  text-align: center;
   display: inline-block;
   box-sizing: border-box;
 }
 
-/* Game buttons */
 .game-button {
-  width: 100%; 
+  width: 100%;
   height: 60px;
   padding: 12px 24px;
   font-size: 18px;
@@ -154,12 +160,11 @@
   transform: scale(1.04);
 }
 
-/* Back to Title button fixed top-right */
 .back-button {
   position: fixed;
-  top: 16px;          
-  right: 16px;        
-  width: 120px;       
+  top: 16px;
+  right: 16px;
+  width: 120px;
   padding: 8px 12px;
   font-size: 16px;
   cursor: pointer;
@@ -169,7 +174,7 @@
   color: white;
   font-family: Arial, sans-serif;
   transition: 0.18s;
-  z-index: 1000;      
+  z-index: 1000;
 }
 
 .back-button:hover {
@@ -177,14 +182,12 @@
   transform: scale(1.04);
 }
 
-/* Letter-by-letter animation */
 .text-letter {
   display: inline-block;
   opacity: 0;
   transition: opacity 0.03s linear;
 }
 
-/* Responsive adjustments */
 @media (max-width: 768px) {
   .top-row {
     flex-direction: column;
@@ -193,7 +196,7 @@
   }
 
   .buttons-column {
-    position: static;       
+    position: static;
     width: 100%;
     margin-left: 0;
     margin-right: 0;
@@ -209,7 +212,6 @@
   }
 }
 
-/* Choice button animation */
 .choice-button {
   padding: 10px 20px;
   margin: 5px;
@@ -224,44 +226,14 @@
 }
 
 @keyframes chosenBlink {
-  0% {
-    background-color: white;
-    color: black;
-  }
-  20% {
-    background-color: red;
-    color: white;
-  }
-  40% {
-    background-color: white;
-    color: black;
-  }
-  60% {
-    background-color: red;
-    color: white;
-  }
-  80% {
-    background-color: white;
-    color: black;
-  }
-  100% {
-    background-color: red;
-    color: white;
-  }
+  0% { background-color: white; color: black; }
+  20% { background-color: red; color: white; }
+  40% { background-color: white; color: black; }
+  60% { background-color: red; color: white; }
+  80% { background-color: white; color: black; }
+  100% { background-color: red; color: white; }
 }
 
-/* HP Colors */
-.hp-green {
-  color: #4caf50;
-  font-weight: bold;
-}
-
-.hp-orange {
-  color: #ff9800;
-  font-weight: bold;
-}
-
-.hp-red {
-  color: #f44336;
-  font-weight: bold;
-}
+.hp-green { color: #4caf50; font-weight: bold; }
+.hp-orange { color: #ff9800; font-weight: bold; }
+.hp-red { color: #f44336; font-weight: bold; }

@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react";
+import { useGame } from "../contexts/GameContext.jsx";
 import storyData from "../assets/story.json";
-import "./game-screen.css";
+import "./GameScreen.css";
 import GameButtons from "../components/game-buttons.jsx";
 import GameTextContainer from "../components/game-text-container.jsx";
+import VictoryScreen from "./VictoryScreen";
+import DefeatScreen from "./DefeatScreen";
 
 // Import all background images
 import sanGubat from "../assets/background/san_gubat.png";
@@ -39,38 +42,25 @@ const bgMap = {
 };
 
 export default function GameScreen({ onBackToTitle }) {
-  const [currentNode, setCurrentNode] = useState(null);
-  const [inventory, setInventory] = useState([]);
-  const [hp, setHp] = useState(100);
-  const [isGameEnded, setIsGameEnded] = useState(false);
-  const [showButtons, setShowButtons] = useState(false);
+  const {
+    currentNode,
+    setCurrentNode,
+    inventory,
+    setInventory,
+    hp,
+    setHp,
+    isGameEnded,
+    setIsGameEnded,
+  } = useGame();
 
+  const [showButtons, setShowButtons] = useState(false);
   const [pendingItem, setPendingItem] = useState(null);
   const [pendingDamage, setPendingDamage] = useState(null);
 
-  // Dynamic background
   const [background, setBackground] = useState(bgMap.start);
   const [fadeBg, setFadeBg] = useState(false);
 
-  // Load saved progress
-  useEffect(() => {
-    const saved = localStorage.getItem("aswangSave");
-    if (saved) {
-      const { node, inv, health } = JSON.parse(saved);
-      setCurrentNode(node);
-      setInventory(inv);
-      setHp(health);
-      setBackground(bgMap[node] || bgMap.start);
-    } else {
-      setCurrentNode("start");
-      setInventory([]);
-      setHp(100);
-      setBackground(bgMap.start);
-    }
-    setShowButtons(false);
-  }, []);
-
-  // Update background when currentNode changes
+  // Update background on node change
   useEffect(() => {
     if (!currentNode) return;
     const nextBg = bgMap[currentNode] || bgMap.start;
@@ -82,71 +72,57 @@ export default function GameScreen({ onBackToTitle }) {
     return () => clearTimeout(timer);
   }, [currentNode]);
 
-  // Save progress
-  useEffect(() => {
-    if (currentNode && !isGameEnded) {
-      localStorage.setItem(
-        "aswangSave",
-        JSON.stringify({ node: currentNode, inv: inventory, health: hp })
-      );
-    }
-  }, [currentNode, inventory, hp, isGameEnded]);
-
   const handleChoice = (choice) => {
     setShowButtons(false);
-
     setTimeout(() => {
       const nextNode = storyData[choice.to];
-
       if (nextNode.onArrive) {
         if (nextNode.onArrive.addItem) setPendingItem(nextNode.onArrive.addItem);
         if (nextNode.onArrive.takeDamage) setPendingDamage(nextNode.onArrive.takeDamage);
       }
-
-      if (nextNode.isEnding) {
-        setIsGameEnded(true);
-        localStorage.removeItem("aswangSave");
-      }
-
       setCurrentNode(choice.to);
     }, 600);
   };
 
-  if (!currentNode) return null;
+  if (!currentNode) return <div className="loading">Loading game...</div>;
+
   const node = storyData[currentNode];
+
+  if (isGameEnded) {
+    if (currentNode === "goodEnding") return <VictoryScreen onBackToTitle={onBackToTitle} />;
+    return <DefeatScreen onBackToTitle={onBackToTitle} />;
+  }
+
+  // Function to calculate gradient color
+  const getHpColor = (hp) => {
+    const green = Math.round((hp / 100) * 255);
+    const red = 255 - green;
+    return `rgb(${red}, ${green}, 0)`;
+  };
 
   return (
     <>
-      {/* Dynamic Background */}
       <div
         className={`background ${fadeBg ? "fade" : ""}`}
         style={{ backgroundImage: `url(${background})` }}
       />
 
-      {/* Main translucent overlay */}
       <div className="game-screen" style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
-        {/* Back button */}
         <button className="back-button" onClick={onBackToTitle}>
           Back to Title
         </button>
 
-        {/* Top row: HP & inventory */}
         <div className="top-row">
           <div className="stats-row">
             <span className="hp-label">HP:</span>
-            <span
-              className={`hp-value ${
-                hp >= 60 ? "hp-green" : hp >= 40 ? "hp-orange" : "hp-red"
-              }`}
-            >
-              {hp}
+            <span className="hp-value" style={{ "--hp-color": getHpColor(hp) }}>
+              {hp}/100
             </span>
             <span className="inventory-label">Inventory:</span>
             <span className="inventory-value">{inventory.join(", ") || "None"}</span>
           </div>
         </div>
 
-        {/* Text container */}
         <GameTextContainer
           text={node.text}
           speaker={node.speaker}
@@ -166,12 +142,13 @@ export default function GameScreen({ onBackToTitle }) {
               });
               setPendingDamage(null);
             }
-            setShowButtons(true);
+
+            if (node.isEnding) setIsGameEnded(true);
+            else setShowButtons(true);
           }}
           speed={30}
         />
 
-        {/* Choice buttons */}
         <GameButtons
           choices={node.choices || []}
           inventory={inventory}
