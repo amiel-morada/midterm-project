@@ -1,14 +1,31 @@
 /* Container */
 .title-container {
+  position: relative; /* required for overlay */
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   height: 100vh;
   width: 100vw;
-  background-color: black;
+  background-color: black; /* fallback if image fails */
   padding-top: 10px;   /* prevent top clipping */
   padding-bottom: 10px; /* prevent bottom clipping */
+  overflow: hidden; /* ensure overlay stays within container */
+}
+
+/* Overlay on top of background */
+.title-container::before {
+  content: "";
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0; */
+  background-color: rgba(0,0,0,0.5); 
+  z-index: 1; /* sits above bg but below content */
+}
+
+/* Make sure content sits above overlay */
+.title-container > * {
+  position: relative;
+  z-index: 2;
 }
 
 /* Title Text */

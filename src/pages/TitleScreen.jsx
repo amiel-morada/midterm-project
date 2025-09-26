@@ -4,6 +4,9 @@ import TitleButtons from "../components/title-buttons.jsx";
 import TitleModal from "../components/title-modal.jsx";
 import { GameContext } from "../contexts/GameContext.jsx";
 
+// Import background image
+import titleBg from "../assets/background/title-bg.png";
+
 export default function TitleScreen({ onStartGame }) {
   const { startNewGame, continueGame } = useContext(GameContext);
 
@@ -27,14 +30,14 @@ export default function TitleScreen({ onStartGame }) {
       setShowModal(true);
     } else {
       startNewGame();
-      onStartGame(); // switch to GameScreen
+      onStartGame();
     }
   };
 
   const handleConfirmYes = () => {
     setShowModal(false);
     startNewGame();
-    onStartGame(); // switch to GameScreen
+    onStartGame();
   };
 
   const handleConfirmNo = () => setShowModal(false);
@@ -42,15 +45,23 @@ export default function TitleScreen({ onStartGame }) {
   // Handle Continue click
   const handleContinue = () => {
     continueGame();
-    onStartGame(); // switch to GameScreen
+    onStartGame();
   };
 
-  // Letter arrays for ASWANG / HUNTER logo
   const aswang = "ASWANG".split("");
   const hunter = "HUNTER".split("");
 
   return (
-    <div className="title-container">
+    <div
+      className="title-container"
+      style={{
+        backgroundImage: `url(${titleBg})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        width: "100vw",
+        height: "100vh",
+      }}
+    >
       <h1 className="title">
         {/* ASWANG */}
         <span className="aswang">
