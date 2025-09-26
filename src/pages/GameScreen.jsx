@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useGame } from "../contexts/GameContext.jsx";
 import storyData from "../assets/story.json";
 import "./GameScreen.css";
@@ -60,6 +60,10 @@ export default function GameScreen({ onBackToTitle }) {
   const [background, setBackground] = useState(bgMap.start);
   const [fadeBg, setFadeBg] = useState(false);
 
+  // 🔴 Flash state
+  const [flash, setFlash] = useState(false);
+  const prevHpRef = useRef(hp);
+
   // Update background on node change
   useEffect(() => {
     if (!currentNode) return;
@@ -70,6 +74,17 @@ export default function GameScreen({ onBackToTitle }) {
       setFadeBg(false);
     }, 300);
     return () => clearTimeout(timer);
+  }, [currentNode]);
+
+  // ✅ Apply onArrive effects also when continuing a saved game
+  useEffect(() => {
+    if (!currentNode) return;
+
+    const node = storyData[currentNode];
+    if (node?.onArrive) {
+      if (node.onArrive.addItem) setPendingItem(node.onArrive.addItem);
+      if (node.onArrive.takeDamage) setPendingDamage(node.onArrive.takeDamage);
+    }
   }, [currentNode]);
 
   const handleChoice = (choice) => {
@@ -83,6 +98,23 @@ export default function GameScreen({ onBackToTitle }) {
       setCurrentNode(choice.to);
     }, 600);
   };
+
+  // Reset pending states when going back to title
+  const handleBackToTitle = () => {
+    setPendingItem(null);
+    setPendingDamage(null);
+    onBackToTitle();
+  };
+
+  // 🔴 Trigger flash only when HP decreases
+  useEffect(() => {
+    if (hp < prevHpRef.current) {
+      setFlash(true);
+      const timer = setTimeout(() => setFlash(false), 400);
+      return () => clearTimeout(timer);
+    }
+    prevHpRef.current = hp; // update stored HP after comparison
+  }, [hp]);
 
   if (!currentNode) return <div className="loading">Loading game...</div>;
 
@@ -107,8 +139,8 @@ export default function GameScreen({ onBackToTitle }) {
         style={{ backgroundImage: `url(${background})` }}
       />
 
-      <div className="game-screen" style={{ backgroundColor: "rgba(0,0,0,0.3)" }}>
-        <button className="back-button" onClick={onBackToTitle}>
+      <div className="game-screen" style={{ backgroundColor: "rgba(0,0,0,0.3)", position: "relative" }}>
+        <button className="back-button" onClick={handleBackToTitle}>
           Back to Title
         </button>
 
@@ -127,20 +159,29 @@ export default function GameScreen({ onBackToTitle }) {
           text={node.text}
           speaker={node.speaker}
           onFinished={() => {
+            // ✅ Apply pending item safely
             if (pendingItem) {
-              setInventory((prev) => [...new Set([...prev, pendingItem])]);
+              setInventory((prev) => {
+                const updated = [...new Set([...prev, pendingItem])];
+                console.log("Adding item:", pendingItem, "Inventory now:", updated);
+                return updated;
+              });
               setPendingItem(null);
             }
+
+            // ✅ Delay damage so text finishes first
             if (pendingDamage) {
-              setHp((prev) => {
-                const newHp = prev - pendingDamage;
-                if (newHp <= 0) {
-                  setCurrentNode("gameOver_hp");
-                  setIsGameEnded(true);
-                }
-                return newHp > 0 ? newHp : 0;
-              });
-              setPendingDamage(null);
+              setTimeout(() => {
+                setHp((prev) => {
+                  const newHp = prev - pendingDamage;
+                  if (newHp <= 0) {
+                    setCurrentNode("gameOver_hp");
+                    setIsGameEnded(true);
+                  }
+                  return newHp > 0 ? newHp : 0;
+                });
+                setPendingDamage(null);
+              }, 400); // wait 0.4s after text is done
             }
 
             if (node.isEnding) setIsGameEnded(true);
@@ -155,6 +196,9 @@ export default function GameScreen({ onBackToTitle }) {
           handleChoice={handleChoice}
           show={showButtons}
         />
+
+        {/* 🔴 Red Flash Overlay */}
+        {flash && <div key={Date.now()} className="red-flash" />}
       </div>
     </>
   );

@@ -130,12 +130,11 @@ export default function GameTextContainer({ text, onFinished, speed = 30 }) {
       {currentSpeaker && <div className="speaker-banner">{currentSpeaker}</div>}
 
       <div className="text-container">
-  {currentSpeaker
-    ? <em>&quot;{displayedText}&quot;</em>
-    : displayedText
-  }
-</div>
-
+        <div className="text-content">
+          {currentSpeaker ? <em>&quot;{displayedText}&quot;</em> : displayedText}
+        </div>
+        <div className="text-hint">[Press spacebar to continue and speed up.]</div>
+      </div>
     </div>
   );
 }

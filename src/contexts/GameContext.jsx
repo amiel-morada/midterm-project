@@ -7,17 +7,18 @@ export const useGame = () => useContext(GameContext);
 
 export const GameProvider = ({ children }) => {
   const [currentNode, setCurrentNode] = useState("start");
-  const [inventory, setInventory] = useState([]);
+  const [inventory, setInventory] = useState(["Bolo"]); // ✅ default item
   const [hp, setHp] = useState(100);
   const [isGameEnded, setIsGameEnded] = useState(false);
 
+  // Load save on mount
   useEffect(() => {
     const saved = localStorage.getItem("aswangSave");
     if (saved) {
       try {
         const { node, inv, health, ended } = JSON.parse(saved);
         setCurrentNode(node || "start");
-        setInventory(inv || []);
+        setInventory(inv?.length ? inv : ["Bolo"]); // ✅ ensure Bolo exists
         setHp(health ?? 100);
         setIsGameEnded(ended || false);
       } catch {
@@ -26,6 +27,7 @@ export const GameProvider = ({ children }) => {
     }
   }, []);
 
+  // Save progress to localStorage
   useEffect(() => {
     localStorage.setItem(
       "aswangSave",
@@ -38,36 +40,48 @@ export const GameProvider = ({ children }) => {
     );
   }, [currentNode, inventory, hp, isGameEnded]);
 
+  // ✅ Always start with clean state
   const startFresh = () => {
     setCurrentNode("start");
-    setInventory([]);
+    setInventory(["Bolo"]);
     setHp(100);
     setIsGameEnded(false);
   };
 
+  // ✅ Hard reset (used when Back to Title → New Game)
   const resetGame = () => {
     localStorage.removeItem("aswangSave");
     startFresh();
   };
 
+  // ✅ Explicit new game
   const startNewGame = () => {
     resetGame();
   };
 
-  const continueGame = () => {
-    const saved = localStorage.getItem("aswangSave");
-    if (saved) {
-      try {
-        const { node, inv, health, ended } = JSON.parse(saved);
+  // ✅ Load save state (Continue option)
+const continueGame = () => {
+  const saved = localStorage.getItem("aswangSave");
+  if (saved) {
+    try {
+      const { node, inv, health, ended } = JSON.parse(saved);
+
+      // ✅ Force refresh of node by resetting first
+      setCurrentNode(null);
+      setTimeout(() => {
         setCurrentNode(node || "start");
-        setInventory(inv || []);
-        setHp(health ?? 100);
-        setIsGameEnded(ended || false);
-      } catch {
-        startFresh();
-      }
+      }, 0);
+
+      setInventory([...(inv || [])]);
+      setHp(health ?? 100);
+      setIsGameEnded(!!ended);
+    } catch {
+      startFresh();
     }
-  };
+  }
+};
+
+
 
   return (
     <GameContext.Provider

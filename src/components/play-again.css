@@ -1,0 +1,48 @@
+/* src/components/play-again.css */
+
+/* Play Again button styled like Back To Title */
+.play-again-button {
+  padding: 14px 32px;
+  font-size: 22px;
+  cursor: pointer;
+  border-radius: 10px;
+  border: none;
+  background-color: darkred;
+  color: white;
+  font-family: Arial, sans-serif;
+  transition: 0.18s;
+  margin-top: 40px; /* space between text and button */
+}
+
+.play-again-button:hover {
+  background-color: crimson;
+  transform: scale(1.06);
+}
+
+/* End screen wrapper (Victory/Defeat) */
+.end-screen {
+  text-align: center;
+  color: white;
+  margin-top: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Big title styling (Victory/Defeat) */
+.end-screen h1.end-title {
+  font-family: 'Ghastly Panic', cursive;
+  font-size: 160px; /* much larger */
+  color: red;
+  text-shadow: 3px 3px 12px black;
+  margin-bottom: 30px; /* space below title */
+}
+
+/* Subtitle text */
+.end-screen p.end-text {
+  font-family: 'Ghastly Panic', cursive;
+  font-size: 48px;
+  color: white;
+  text-shadow: 2px 2px 8px black;
+  margin-bottom: 50px; /* space before button */
+}

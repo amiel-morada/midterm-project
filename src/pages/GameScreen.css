@@ -110,7 +110,7 @@ body, html {
 }
 
 .text-container {
-  position: relative;
+  position: relative; /* anchor for absolute hint */
   height: 200px;
   width: 100%;
   padding: 45px 55px;
@@ -121,10 +121,29 @@ body, html {
   font-size: 18px;
   line-height: 1.4;
   word-wrap: break-word;
-  overflow-y: auto; /* keeps scrolling only inside text box */
+  overflow-y: auto;
   white-space: pre-wrap;
   word-break: break-word;
   box-sizing: border-box;
+}
+
+/* Text content padding bottom to prevent overlap with hint */
+.text-content {
+  padding-bottom: 28px;
+}
+
+/* Hint fixed at bottom center of text box */
+.text-hint {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  font-style: italic;
+  color: rgba(187, 187, 187, 0.8); /* semi-transparent */
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
 }
 
 .speaker-banner {
@@ -237,3 +256,20 @@ body, html {
 .hp-green { color: #4caf50; font-weight: bold; }
 .hp-orange { color: #ff9800; font-weight: bold; }
 .hp-red { color: #f44336; font-weight: bold; }
+
+.red-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255, 0, 0, 0.6) 15%, transparent 70%) center,
+              radial-gradient(circle at top left, rgba(255, 0, 0, 0.4) 25%, transparent 80%),
+              radial-gradient(circle at bottom right, rgba(255, 0, 0, 0.4) 25%, transparent 80%);
+  background-blend-mode: multiply;
+  animation: flash 0.45s ease-out forwards;
+}
+
+@keyframes flash {
+  0% { opacity: 0.9; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; }
+}

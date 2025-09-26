@@ -1,14 +1,15 @@
 import React from "react";
 import victoryBg from "../assets/background/victory_sunrise.png";
 import { useGame } from "../contexts/GameContext";
-import "./GameScreen.css"; // reuse styles
+import PlayAgainButton from "../components/play-again.jsx";
+import "../components/play-again.css";
 
-export default function VictoryScreen({ onBackToTitle }) {
+export default function VictoryScreen({ onPlayAgain, onBackToTitle }) {
   const { resetGame } = useGame();
 
-  const handleBackToTitle = () => {
-    resetGame();       // Clear progress
-    onBackToTitle();   // Go back to title screen
+  const handlePlayAgain = () => {
+    resetGame();
+    onPlayAgain();
   };
 
   return (
@@ -16,16 +17,9 @@ export default function VictoryScreen({ onBackToTitle }) {
       className="game-screen"
       style={{ backgroundImage: `url(${victoryBg})`, backgroundSize: "cover" }}
     >
-      <div style={{ textAlign: "center", color: "white", marginTop: "150px" }}>
-        <h1>Victory!</h1>
-        <p>You successfully completed the quest!</p>
-        <button
-          className="back-button"
-          onClick={handleBackToTitle}
-          style={{ marginTop: "20px" }}
-        >
-          Back to Title
-        </button>
+      <div className="end-screen">
+        <h1 className="end-title">Victory!</h1>
+        <PlayAgainButton onClick={handlePlayAgain} onBackToTitle={onBackToTitle} />
       </div>
     </div>
   );
