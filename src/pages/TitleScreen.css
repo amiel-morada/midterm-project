@@ -11,6 +11,8 @@
   padding-top: 10px;   /* prevent top clipping */
   padding-bottom: 10px; /* prevent bottom clipping */
   overflow: hidden; /* ensure overlay stays within container */
+  background-size: cover;
+  background-position: center;
 }
 
 /* Overlay on top of background */
@@ -194,9 +196,32 @@
   outline: none; /* remove browser blue outline */
 }
 
-.title-container {
-  background-size: cover;
-  background-position: center;
-  width: 100vw;
-  height: 100vh;
+/* === Input Box for Player Name === */
+.name-input {
+  margin-top: 20px;
+  padding: 12px;
+  font-size: 20px;
+  border-radius: 8px;
+  border: 2px solid darkred;
+  background-color: rgba(0,0,0,0.6);
+  color: white;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.name-input:focus {
+  border-color: crimson;
+  outline: none;
+  background-color: rgba(0,0,0,0.8);
+}
+
+/* Label when name exists */
+.name-label {
+  margin-top: 20px;
+  font-size: 22px;
+  color: white;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  text-shadow: 1px 1px 4px black;
 }

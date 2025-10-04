@@ -1,10 +1,9 @@
+// src/screens/TitleScreen.jsx
 import React, { useState, useEffect, useContext } from "react";
 import "./TitleScreen.css";
 import TitleButtons from "../components/title-buttons.jsx";
 import TitleModal from "../components/title-modal.jsx";
 import { GameContext } from "../contexts/GameContext.jsx";
-
-// Import background image
 import titleBg from "../assets/background/title-bg.png";
 
 export default function TitleScreen({ onStartGame }) {
@@ -13,48 +12,41 @@ export default function TitleScreen({ onStartGame }) {
   const [hasSave, setHasSave] = useState(false);
   const [currentNode, setCurrentNode] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [playerName, setPlayerName] = useState("");
 
-  // Check if there is a saved game
+  // ✅ Check save data
   useEffect(() => {
     const saved = localStorage.getItem("aswangSave");
     if (saved) {
-      const { node, playerName: savedName } = JSON.parse(saved);
-      setHasSave(true);
+      const { node } = JSON.parse(saved);
       setCurrentNode(node);
-      if (savedName) setPlayerName(savedName);
+
+      // Only count as "valid save" if node exists AND has started progress
+      if (node && node !== "start") {
+        setHasSave(true);
+      }
     }
   }, []);
 
-  // Handle New Game click
+  // ✅ Start new game (open modal if needed)
   const handleNewGame = () => {
-    if (!playerName.trim()) return; // prevent starting without name
-
-    if (hasSave && currentNode !== "start") {
-      setShowModal(true);
-    } else {
-      localStorage.setItem(
-        "aswangSave",
-        JSON.stringify({ node: "start", playerName })
-      );
-      startNewGame(playerName);
-      onStartGame();
-    }
+    setShowModal(true); // Always open modal for name entry
   };
 
-  const handleConfirmYes = () => {
+  // ✅ Confirm new game (with name)
+  const handleConfirmYes = (playerName) => {
     setShowModal(false);
+
+    // Save with node=start and playerName
     localStorage.setItem(
       "aswangSave",
       JSON.stringify({ node: "start", playerName })
     );
+
     startNewGame(playerName);
     onStartGame();
   };
 
-  const handleConfirmNo = () => setShowModal(false);
-
-  // Handle Continue click
+  // ✅ Continue existing save
   const handleContinue = () => {
     continueGame();
     onStartGame();
@@ -64,9 +56,11 @@ export default function TitleScreen({ onStartGame }) {
   const hunter = "HUNTER".split("");
 
   return (
-    <div className="title-container" style={{ backgroundImage: `url(${titleBg})` }}>
+    <div
+      className="title-container"
+      style={{ backgroundImage: `url(${titleBg})` }}
+    >
       <h1 className="title">
-        {/* ASWANG */}
         <span className="aswang">
           {aswang.map((ch, i) => (
             <span
@@ -82,7 +76,6 @@ export default function TitleScreen({ onStartGame }) {
           ))}
         </span>
         <br />
-        {/* HUNTER */}
         <span className="hunter">
           {hunter.map((ch, i) => (
             <span
@@ -99,18 +92,6 @@ export default function TitleScreen({ onStartGame }) {
         </span>
       </h1>
 
-      {/* Player Name Input */}
-      <div className="player-name-container">
-        <input
-          type="text"
-          className="player-name-input"
-          placeholder="Enter your name..."
-          value={playerName}
-          onChange={(e) => setPlayerName(e.target.value)}
-          disabled={hasSave} // disable if save exists
-        />
-      </div>
-
       {/* Buttons */}
       <TitleButtons
         hasSave={hasSave}
@@ -119,11 +100,12 @@ export default function TitleScreen({ onStartGame }) {
         onContinue={handleContinue}
       />
 
-      {/* Modal */}
+      {/* Modal for new game confirmation + name entry */}
       <TitleModal
         isVisible={showModal}
+        hasProgress={hasSave && currentNode !== "start"}
         onConfirm={handleConfirmYes}
-        onCancel={handleConfirmNo}
+        onCancel={() => setShowModal(false)}
       />
     </div>
   );

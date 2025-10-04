@@ -1,13 +1,10 @@
 // src/components/game-text-container.jsx
 import React, { useState, useEffect, useRef } from "react";
+import { useGame } from "../contexts/GameContext.jsx";
 
-/**
- * Props:
- * - text: string[] | {speaker: string, text: string}[] (array of lines or objects with speaker)
- * - onFinished: () => void
- * - speed: number (ms per character, default 30)
- */
 export default function GameTextContainer({ text, onFinished, speed = 30 }) {
+  const { playerName } = useGame();
+
   const [lineIndex, setLineIndex] = useState(0);
   const [displayedText, setDisplayedText] = useState("");
   const [currentSpeaker, setCurrentSpeaker] = useState(null);
@@ -16,10 +13,23 @@ export default function GameTextContainer({ text, onFinished, speed = 30 }) {
   const charIndexRef = useRef(0);
   const allFinishedRef = useRef(false);
 
-  // Normalize lines
-  const lines = Array.isArray(text) ? text : [text ?? ""];
+  // ✅ Normalize and replace placeholders in both text and speaker
+  const replaceName = (line) => {
+    if (typeof line === "string") {
+      return line.replace(/\{playerName\}/g, playerName);
+    }
+    return {
+      ...line,
+      text: line.text.replace(/\{playerName\}/g, playerName),
+      speaker: line.speaker
+        ? line.speaker.replace(/\{playerName\}/g, playerName)
+        : null,
+    };
+  };
+
+  const lines = Array.isArray(text) ? text.map(replaceName) : [replaceName(text ?? "")];
   const currentLine = lines[lineIndex] ?? "";
-  
+
   const clearTimer = () => {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
@@ -30,7 +40,6 @@ export default function GameTextContainer({ text, onFinished, speed = 30 }) {
   const step = () => {
     if (!currentLine) return;
 
-    // Determine line text and speaker
     const lineText = typeof currentLine === "string" ? currentLine : currentLine.text;
     const speaker = typeof currentLine === "string" ? null : currentLine.speaker;
 
@@ -42,7 +51,6 @@ export default function GameTextContainer({ text, onFinished, speed = 30 }) {
       return;
     }
 
-    // Update speaker banner
     setCurrentSpeaker(speaker);
 
     const ch = lineText[charIndexRef.current];
@@ -70,7 +78,7 @@ export default function GameTextContainer({ text, onFinished, speed = 30 }) {
     }
 
     return () => clearTimer();
-  }, [text]);
+  }, [text, playerName]);
 
   // Advance with Spacebar
   useEffect(() => {
@@ -126,7 +134,6 @@ export default function GameTextContainer({ text, onFinished, speed = 30 }) {
 
   return (
     <div className="text-container-wrapper">
-      {/* Only show banner if there is a speaker */}
       {currentSpeaker && <div className="speaker-banner">{currentSpeaker}</div>}
 
       <div className="text-container">
