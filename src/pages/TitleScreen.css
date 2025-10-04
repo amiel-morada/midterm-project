@@ -193,3 +193,10 @@
   color: white;
   outline: none; /* remove browser blue outline */
 }
+
+.title-container {
+  background-size: cover;
+  background-position: center;
+  width: 100vw;
+  height: 100vh;
+}

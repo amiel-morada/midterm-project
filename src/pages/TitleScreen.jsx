@@ -13,30 +13,42 @@ export default function TitleScreen({ onStartGame }) {
   const [hasSave, setHasSave] = useState(false);
   const [currentNode, setCurrentNode] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const [playerName, setPlayerName] = useState("");
 
   // Check if there is a saved game
   useEffect(() => {
     const saved = localStorage.getItem("aswangSave");
     if (saved) {
-      const { node } = JSON.parse(saved);
+      const { node, playerName: savedName } = JSON.parse(saved);
       setHasSave(true);
       setCurrentNode(node);
+      if (savedName) setPlayerName(savedName);
     }
   }, []);
 
   // Handle New Game click
   const handleNewGame = () => {
+    if (!playerName.trim()) return; // prevent starting without name
+
     if (hasSave && currentNode !== "start") {
       setShowModal(true);
     } else {
-      startNewGame();
+      localStorage.setItem(
+        "aswangSave",
+        JSON.stringify({ node: "start", playerName })
+      );
+      startNewGame(playerName);
       onStartGame();
     }
   };
 
   const handleConfirmYes = () => {
     setShowModal(false);
-    startNewGame();
+    localStorage.setItem(
+      "aswangSave",
+      JSON.stringify({ node: "start", playerName })
+    );
+    startNewGame(playerName);
     onStartGame();
   };
 
@@ -52,16 +64,7 @@ export default function TitleScreen({ onStartGame }) {
   const hunter = "HUNTER".split("");
 
   return (
-    <div
-      className="title-container"
-      style={{
-        backgroundImage: `url(${titleBg})`,
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        width: "100vw",
-        height: "100vh",
-      }}
-    >
+    <div className="title-container" style={{ backgroundImage: `url(${titleBg})` }}>
       <h1 className="title">
         {/* ASWANG */}
         <span className="aswang">
@@ -95,6 +98,18 @@ export default function TitleScreen({ onStartGame }) {
           ))}
         </span>
       </h1>
+
+      {/* Player Name Input */}
+      <div className="player-name-container">
+        <input
+          type="text"
+          className="player-name-input"
+          placeholder="Enter your name..."
+          value={playerName}
+          onChange={(e) => setPlayerName(e.target.value)}
+          disabled={hasSave} // disable if save exists
+        />
+      </div>
 
       {/* Buttons */}
       <TitleButtons

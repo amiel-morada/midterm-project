@@ -5,7 +5,7 @@
       "You arrive at the dimly lit town of San Gubat. The air is heavy with fear.",
       {
         "speaker": "Elias",
-        "text": "Hunter! You didn’t think I’d let you face this alone, did you? I’m coming with you. Adventure calls!"
+        "text": "{playerName}! You didn’t think I’d let you face this alone, did you? I’m coming with you. Adventure calls!"
       },
       {
         "speaker": "Elias",
@@ -25,7 +25,7 @@
     "text": [
       {
         "speaker": "Dahra",
-        "text": "Traveler, you must be Hunter. I am Dahra. Be careful — the nights here are not kind."
+        "text": "Traveler, you must be {playerName}. I am Dahra. Be careful — the nights here are not kind."
       },
       {
         "speaker": "Dahra",
@@ -36,7 +36,7 @@
         "text": "Salt? Hmph. Old women’s tales... but I suppose we should keep it in mind."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Thank you, Dahra. Where should I begin?"
       }
     ],
@@ -55,11 +55,11 @@
   "askAlbularyo": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I should find the old Albularyo at the edge of town. Maybe he can tell me more about this creature."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Good evening, Albularyo. Can you help me? What am I dealing with?"
       },
       {
@@ -87,7 +87,7 @@
         "text": "Who is this man you are with?"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "It is my bestfriend Elias."
       },
       {
@@ -99,7 +99,7 @@
         "text": "He should not be here. Leave him behind."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "But he is my friend. I can’t just leave him."
       },
       {
@@ -108,7 +108,7 @@
       },
       {
         "speaker": "Elias",
-        "text": "Don't listen to him, Hunter. I’m coming with you."
+        "text": "Don't listen to him, {playerName}. I’m coming with you."
       },
       {
         "speaker": "Elias",
@@ -134,16 +134,16 @@
   "askCaptain": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "The captain might know something about these attacks. I need to report immediately."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Captain, I need your guidance. What kind of creature am I facing?"
       },
       {
         "speaker": "Captain",
-        "text": "So, you were the 'Hunter' everyone was waiting for."
+        "text": "So, you were the '{playerName}' everyone was waiting for."
       },
       {
         "speaker": "Captain",
@@ -162,7 +162,7 @@
         "text": "Some tales said that the hero will fight the Manananggal alone. Why are you with him?"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Elias is my bestfriend. He will come with me"
       },
       {
@@ -189,7 +189,7 @@
     "text": [
       {
         "speaker": "Mang Kardo",
-        "text": "Hunter... I am Mang Kardo, a farmer. I’ve seen shadows circling the old church at night."
+        "text": "{playerName}... I am Mang Kardo, a farmer. I’ve seen shadows circling the old church at night."
       },
       {
         "speaker": "Mang Kardo",
@@ -200,7 +200,7 @@
         "text": "More salt talk. Isn’t it strange that everyone here repeats the same story? Almost as if they want you to believe it."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Thank you, Mang Kardo. I’ll check the old church."
       },
       {
@@ -209,7 +209,7 @@
       },
       {
         "speaker": "Elias",
-        "text": "Hmmp, weirdo. Let's go now Hunter!"
+        "text": "Hmmp, weirdo. Let's go now {playerName}!"
       }
     ],
     "choices": [
@@ -230,7 +230,7 @@
         "text": "Its so creepy here... I don't like it. Let's leave this place."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Not now Elias. We need to check the church for clues."
       },
       {
@@ -238,7 +238,7 @@
         "text": "Yea yea, whatever. Just be quick."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I wonder if we should check the bell tower or the altar."
       },
       {
@@ -266,19 +266,19 @@
   "bellTower": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I hear something above... I need to prepare myself for whatever's up there."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Elias, where are you?"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Elias?"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "ELIAS!"
       },
       {
@@ -292,7 +292,7 @@
       "It's a Wakwak, feasting on a goat.",
       "It turns its glowing red eyes on you!",
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I AM NOT AFRAID OF YOU, MONSTER!"
       }
     ],
@@ -317,11 +317,11 @@
   "useGarlicOnWakwak": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Take this! The garlic should weaken it."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I strike with my bolo as it recoils."
       },
       {
@@ -341,7 +341,7 @@
   "fightWakwakNoGarlic": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Without garlic, I have no advantage. I need to fight with what I have!"
       },
       {
@@ -351,7 +351,7 @@
       "It claws you deeply before you can land a solid blow.",
       "You lose 30 HP.",
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "AARRGHHH... I need to get out of here!"
       }
     ],
@@ -369,7 +369,7 @@
   "altar": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Let's check the altar. Something feels safe here."
       },
       {
@@ -379,11 +379,11 @@
       "The altar is overturned.",
       "You find something shiny.",
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Wait, where's Elias?"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "He must have went outside."
       },
       "Behind the altar, you find a small, intricately carved amulet throbbing with a faint warmth.",
@@ -404,15 +404,15 @@
   "npcBeforeRiceFields": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "There you are Elias! I was worried."
       },
       {
         "speaker": "Elias",
-        "text": "Sorry Hunter, I just felt uneasy back in the church."
+        "text": "Sorry {playerName}, I just felt uneasy back in the church."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Is that wound? What happened? Did the manananggal attack you?"
       },
       {
@@ -421,11 +421,11 @@
       },
       {
         "speaker": "Luningning",
-        "text": "You must be Hunter... my name is Luningning. I lost my sister to that winged beast."
+        "text": "You must be {playerName}... my name is Luningning. I lost my sister to that winged beast."
       },
       {
-        "speaker": "Hunter",
-        "text": "Yes,  I am Hunter. I'm sorry for your loss, Luningning. Do you know where the creature might be?"
+        "speaker": "{playerName}",
+        "text": "Yes,  I am {playerName}. I'm sorry for your loss, Luningning. Do you know where the creature might be?"
       },
       {
         "speaker": "Luningning",
@@ -433,7 +433,7 @@
       },
       {
         "speaker": "Elias",
-        "text": "Again with the salt... doesn’t it feel too convenient? But fine, Hunter. Lead the way."
+        "text": "Again with the salt... doesn’t it feel too convenient? But fine, {playerName}. Lead the way."
       }
     ],
     "choices": [
@@ -450,18 +450,18 @@
       "The air is still, save for the chirping of crickets.",
       {
         "speaker": "Elias",
-        "text": "I'M SCARED HUNTER! LET'S GET OUT OF HERE!"
+        "text": "I'M SCARED {playerName}! LET'S GET OUT OF HERE!"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "WAIT, ELIAS! NO! I HAVE TO CHECK IT OUT!"
       },
       {
         "speaker": "Elias",
-        "text": "YOU CAN DO IT HUNTER! I WILL WAIT YOU AT THE BALLETE TREE!"
+        "text": "YOU CAN DO IT {playerName}! I WILL WAIT YOU AT THE BALLETE TREE!"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "You moron, don't just run off!"
       },
       "In the distance, you hear the faint sound of a baby crying."
@@ -481,7 +481,7 @@
   "investigateTiyanak": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "That crying... could be a trap, but I can't ignore it."
       },
       {
@@ -508,7 +508,7 @@
   "tiyanakDamage": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I was fooled! Its bite is painful!"
       },
       "You curse your foolishness and continue towards the ominous Balete tree.",
@@ -529,12 +529,12 @@
   "baleteTree_approach": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I can't believe Elias ran off. I hope he's okay..."
       },
       "You've reached the heart of the darkness: a massive, ancient Balete tree with thick, hanging roots.",
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "But he said we'll meet here. I have to find him."
       },
       "You can hear a sickening squelching sound from above.",
@@ -555,7 +555,7 @@
   "finalFight_direct": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I need to face it head-on. I must be careful!"
       },
       {
@@ -585,20 +585,20 @@
   "finalFight_search": {
     "text": [
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "I must find its lower half. This is my only chance!"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "There you are Elias! Where have you ran off this time?!"
       },
       "Hidden among the gnarled roots, you find it: the creature's vulnerable lower torso, standing motionless.",
       {
         "speaker": "Elias",
-        "text": "...Yes. There it is. End it quickly, Hunter. Or should I say... try to."
+        "text": "...Yes. There it is. End it quickly, {playerName}. Or should I say... try to."
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "Elias...? Why do you look so strange... and those wounds...?"
       },
       {
@@ -606,7 +606,7 @@
         "text": "Fool! Did you never wonder why I guided you here? I am the Manananggal!"
       },
       {
-        "speaker": "Hunter",
+        "speaker": "{playerName}",
         "text": "No... Elias... all this time?!"
       }
     ],
@@ -632,12 +632,12 @@
     "High above, the winged creature gives a final, agonizing shriek and disintegrates into dust.",
     "The sun begins to rise.",
     {
-      "speaker": "Hunter",
+      "speaker": "{playerName}",
       "text": "Elias... my friend... why? Why did it have to be you?"
     },
     "You fall to your knees, torn between triumph and heartbreak.",
     {
-      "speaker": "Hunter",
+      "speaker": "{playerName}",
       "text": "At least... I have killed the monster. San Gubat is now."
     },
     "You have saved San Gubat..."
@@ -655,7 +655,7 @@
     },
     "The creature swoops down, enraged, and impales you with its sharp tongue.",
     {
-      "speaker": "Hunter",
+      "speaker": "{playerName}",
       "text": "Elias... why...?"
     },
     "Your lack of the proper tool was your undoing.",
